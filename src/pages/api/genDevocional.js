@@ -6,6 +6,8 @@ export default async function handler(req, res) {
 
     const data = extractMessage(req.body);
 
+    console.log('user Data ', JSON.stringify(data))
+
     if (data.message.startsWith('inscrever')) {
       await db.collection("inscricoes").add({
         user: data.user,
