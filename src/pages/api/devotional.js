@@ -18,6 +18,7 @@ export default async function handler(req, res) {
     console.log('made call to subscriotion')
     subscriptionDocuments.forEach(async doc => {
         console.log('reading docs', JSON.stringify(doc.data()))
+        console.log('text => ', text)
         bot.sendMessage(doc.get('chatId'), text)
     });
     console.log('finished')

@@ -3,9 +3,8 @@ const { generateDevotional } = require("./generateDevotional")
 
 async function main() {
     try {
-        console.log('callling openai', JSON.stringify(process.env))
         const text = await generateDevotional();
-        console.log('calling api')
+        console.log('calling api', text)
         await axios.post(`${process.env.URL}/api/devotional`, { text }, {
             headers: {
                 'Authorization': `Bearer ${process.env.APP_KEY}`
