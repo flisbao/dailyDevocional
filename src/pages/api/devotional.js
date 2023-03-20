@@ -1,11 +1,16 @@
 const {database} = require("@/config/firebaseConfig");
 const telegram = require("@/lib/telegram_response");
-const {generateDevotional} = require("@/lib/generateDevotional")
+
 export default async function handler(req, res) {
-    res.json({})
-    console.log('called')
-    const text = await generateDevotional();
-    console.log('got text ', text)
+    const { APP_KEY } = process.env;
+    const { ACTION_KEY } = req.headers.authorization.split(" ")[1];
+
+    if (ACTION_KEY !== ACTION_KEY) {
+        res.status(401).send('unauthorized');
+        return;
+    }
+
+    const text = req.body.text;
     const db = database();
     const subscriptionDocuments =  await db.collection('inscricoes').get();
     console.log('made call to subscriotion')
@@ -14,4 +19,5 @@ export default async function handler(req, res) {
         await telegram.sendMessage(text, doc.get('chatId'))
     });
     console.log('finished')
+    res.json({});
 }
