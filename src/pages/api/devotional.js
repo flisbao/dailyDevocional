@@ -2,6 +2,7 @@ const {database} = require("@/config/firebaseConfig");
 const telegram = require("@/lib/telegram_response");
 const {generateDevotional} = require("@/lib/generateDevotional")
 export default async function handler(req, res) {
+    res.json({})
     console.log('called')
     const text = await generateDevotional();
     console.log('got text ', text)
@@ -13,5 +14,4 @@ export default async function handler(req, res) {
         await telegram.sendMessage(text, doc.get('chatId'))
     });
     console.log('finished')
-    res.json({})
 }
