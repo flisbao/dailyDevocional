@@ -5,8 +5,6 @@ const setTimeoutP = require('timers/promises').setTimeout;
 export default async function handler(req, res) {
     const { APP_KEY, TELEGRAM_BOT } = process.env;
 
-    console.log(JSON.stringify(req.headers.auth))
-
     const auth = req.headers.auth.split(" ")[1];
 
     const bot = new TelegramBot(TELEGRAM_BOT, { polling: false });
@@ -24,8 +22,7 @@ export default async function handler(req, res) {
         subscriptionDocuments.forEach(async doc => {
             const response = await bot.sendMessage(doc.get('chatId'), text)
             console.log(response)
-            await setTimeoutP(500)
-            console.log(response.status)
+            await setTimeoutP(100)
         });
         console.log('finished')
         res.json({});
