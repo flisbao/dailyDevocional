@@ -1,5 +1,6 @@
 const { database } = require("@/config/firebaseConfig");
 const TelegramBot = require('node-telegram-bot-api');
+const setTimeoutP = require('timers/promises').setTimeout;
 
 export default async function handler(req, res) {
     const { APP_KEY, TELEGRAM_BOT } = process.env;
@@ -21,9 +22,10 @@ export default async function handler(req, res) {
         const subscriptionDocuments = await db.collection('inscricoes').get();
         console.log('made call to subscriotion')
         subscriptionDocuments.forEach(async doc => {
-            console.log('reading docs', JSON.stringify(doc.data()))
-            console.log('text => ', text)
-            await bot.sendMessage(doc.get('chatId'), text)
+            const response = await bot.sendMessage(doc.get('chatId'), text)
+            console.log(response)
+            await setTimeoutP(500)
+            console.log(response.status)
         });
         console.log('finished')
         res.json({});
