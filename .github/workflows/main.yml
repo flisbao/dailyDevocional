@@ -2,10 +2,6 @@ name: hourly-cron-job-main
 on:
   schedule:
     - cron: '0 5 * * *'
-env:
-  URL: ${{ secrets.URL }}
-  APP_KEY: ${{ secrets.APP_KEY }}
-  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 jobs:
   cron:
     runs-on: ubuntu-latest
@@ -16,3 +12,7 @@ jobs:
           node-version: 18
       
       - run: cd scheduled && npm i && node main.js
+        env:
+          URL: ${{ secrets.URL }}
+          APP_KEY: ${{ secrets.APP_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} 
