@@ -1,5 +1,8 @@
 name: hourly-cron-job
 on: [workflow_dispatch]
+env:
+  URL: ${{ secrets.URL }}
+  APP_KEY: ${{ secrets.APP_KEY }}
 jobs:
   cron:
     runs-on: ubuntu-latest
