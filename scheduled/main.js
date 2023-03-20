@@ -7,7 +7,7 @@ async function main() {
         console.log('calling api', text)
         await axios.post(`${process.env.URL}/api/devotional`, { text }, {
             headers: {
-                'Authorization': `Bearer ${process.env.APP_KEY}`
+                'auth': `Bearer ${process.env.APP_KEY}`
             }
         });
         console.log('finished')
