@@ -3,7 +3,7 @@ const { generateDevotional } = require("./generateDevotional")
 
 async function main() {
     try {
-        console.log('callling openai', JSON.stringify(process.env.URL))
+        console.log('callling openai', JSON.stringify(process.env))
         const text = await generateDevotional();
         console.log('calling api')
         await axios.post(`${process.env.URL}/api/devotional`, { text }, {
