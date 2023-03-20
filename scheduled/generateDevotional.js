@@ -5,6 +5,8 @@ const configuration = new Configuration({
 
 async function generateDevotional() {
   try {
+
+    console.log('Api token', process.env.OPENAI_API_KEY.substring(5,2));
     const prompt = 'generate a biblic devotional about a random bible passage of the new testament in brazilian portuguese that is equal to any sermon of jonathan edwards and end this short devotional with a guided prayer to God';
 
     const temperature = 0.5;
