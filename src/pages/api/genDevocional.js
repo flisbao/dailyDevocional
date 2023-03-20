@@ -5,6 +5,7 @@ const telegram = require("@/lib/telegram_response");
 export default async function handler(req, res) {
 
     const data = extractMessage(req.body);
+    console.log(JSON.stringify(data));
 
     if (data.message.toLowerCase().startsWith('inscrever')) {
       const db = database();
