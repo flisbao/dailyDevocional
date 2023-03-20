@@ -12,7 +12,9 @@ export function database() {
       })
     });
 
-    return getFirestore();
+    const db = getFirestore();
+    db.settings({ ignoreUndefinedProperties: true })
+    return db;
   } catch (error) {
     console.log('Firebase admin initialization error', error.stack);
   }
