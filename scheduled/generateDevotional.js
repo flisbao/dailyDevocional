@@ -4,6 +4,7 @@ const configuration = new Configuration({
 });
 
 async function generateDevotional() {
+  try {
     const prompt = 'generate a biblic devotional about a random bible passage of the new testament in brazilian portuguese that is equal to any sermon of jonathan edwards and end this short devotional with a guided prayer to God';
 
     const temperature = 0.5;
@@ -21,6 +22,9 @@ async function generateDevotional() {
       });
 
     return response.data.choices[0].text
+  } catch (ex) {
+    console.error('while getting devotional an error happened ', ex.message)
+  }
 }
 
 module.exports = {
