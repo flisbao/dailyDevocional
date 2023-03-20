@@ -12,5 +12,3 @@ jobs:
       - run: cd scheduled && npm i && node main.js
         env:
           URL: ${{ secrets.URL }}
-          APP_KEY: ${{ secrets.APP_KEY }}
-          OPENAI_API_KEY: ${{ secrets.Production.OPENAI_API_KEY }}
