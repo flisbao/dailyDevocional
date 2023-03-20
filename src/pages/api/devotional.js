@@ -3,6 +3,9 @@ const TelegramBot = require('node-telegram-bot-api');
 
 export default async function handler(req, res) {
     const { APP_KEY, TELEGRAM_BOT } = process.env;
+
+    console.log(JSON.stringify(req.headers))
+
     const { ACTION_KEY } = req.headers['Authorization'].split(" ")[1];
 
     const bot = new TelegramBot(TELEGRAM_BOT, { polling: false });
