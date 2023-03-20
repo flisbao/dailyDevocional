@@ -20,5 +20,10 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "vercel": "^28.17.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6"
   }
 }

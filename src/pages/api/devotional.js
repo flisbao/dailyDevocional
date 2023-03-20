@@ -1,6 +1,6 @@
-const { database } = require("@/config/firebaseConfig");
-const TelegramBot = require('node-telegram-bot-api');
-const setTimeoutP = require('timers/promises').setTimeout;
+import db from "@/config/firebaseConfig"
+import TelegramBot from 'node-telegram-bot-api';
+import {setTimeout} from 'timers/promises';
 
 export default async function handler(req, res) {
     const { APP_KEY, TELEGRAM_BOT } = process.env;
@@ -16,13 +16,14 @@ export default async function handler(req, res) {
 
     try {
         const text = req.body.text;
-        const db = database();
         const subscriptionDocuments = await db.collection('inscricoes').get();
         console.log('made call to subscriotion')
-        subscriptionDocuments.forEach(async doc => {
-            const response = await bot.sendMessage(doc.get('chatId'), text)
-            console.log(response)
-            await setTimeoutP(100)
+
+        
+        subscriptionDocuments.forEach(async (doc) => {
+            const response = await bot.sendMessage(doc.get('chatId'), text);
+            console.log(response);
+            await setTimeout(100);
         });
         console.log('finished')
         res.json({});
