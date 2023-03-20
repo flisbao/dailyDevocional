@@ -10,8 +10,6 @@ export default async function handler(req, res) {
 
     const bot = new TelegramBot(TELEGRAM_BOT, { polling: false });
 
-    console.log(`Action ${ACTION_KEY}`)
-
     if (auth !== APP_KEY) {
         res.status(401).send('unauthorized');
         return;
