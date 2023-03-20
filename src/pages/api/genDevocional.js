@@ -1,16 +1,15 @@
 const {extractMessage} = require('@/domain/user');
-const db = require("@/config/firebaseConfig");
+const {database} = require("@/config/firebaseConfig");
 const telegram = require("@/lib/telegram_response");
 
 export default async function handler(req, res) {
 
     const data = extractMessage(req.body);
 
-    console.log('user Data ', JSON.stringify(data))
-
-    if (data.message.startsWith('inscrever')) {
+    if (data.message.toLowerCase().startsWith('inscrever')) {
+      const db = database();
       await db.collection("inscricoes").add({
-        user: data.user,
+        user: { ...data.user },
         chatId: data.chatId
       })
 
