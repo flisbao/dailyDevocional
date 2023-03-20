@@ -14,20 +14,40 @@ export default async function handler(req, res) {
         return;
     }
 
-    try {
-        const text = req.body.text;
-        const subscriptionDocuments = await db.collection('inscricoes').get();
-        console.log('made call to subscriotion')
+    if (req.method === 'GET') {
+        try {
+            const subscriptionDocuments = await db.collection('inscricoes').get();
+            const currentDevotionalDocuments = await db.collection('devotional').get();
+            let devotional = '';
+            currentDevotionalDocuments.forEach(doc => {
+                devotional = doc.get('devotional')
+            })
+            
+    
+            
+            subscriptionDocuments.forEach(async (doc) => {
+                const response = await bot.sendMessage(doc.get('chatId'), devotional);
+                console.log(response);
+                await setTimeout(100);
+            });
+            console.log('finished')
+            res.json({});
+        } catch (ex) {
+            console.error(`Error when calling ${ex.message}`)
+        }
+    }
+    
 
-        
-        subscriptionDocuments.forEach(async (doc) => {
-            const response = await bot.sendMessage(doc.get('chatId'), text);
-            console.log(response);
-            await setTimeout(100);
-        });
-        console.log('finished')
-        res.json({});
-    } catch (ex) {
-        console.error(`Error when calling ${ex.message}`)
+    if (req.method === 'POST') {
+        try {
+            const text = req.body.text;
+            const subscriptionDocuments = await db.collection('devotional').doc('current').set({
+                devotional: text
+            })
+            
+            res.json({});
+        } catch (ex) {
+            console.error(`Error when calling ${ex.message}`)
+        }
     }
 }
