@@ -11,4 +11,4 @@ jobs:
       
       - run: cd scheduled && npm i && node main.js
         env:
-          URL: ${{ secrets.URL }}
+          URL: ${{ secrets.production.URL }}
