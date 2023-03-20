@@ -6,13 +6,13 @@ export default async function handler(req, res) {
 
     console.log(JSON.stringify(req.headers.auth))
 
-    const { ACTION_KEY } = req.headers.auth.split(" ")[1];
+    const auth = req.headers.auth.split(" ")[1];
 
     const bot = new TelegramBot(TELEGRAM_BOT, { polling: false });
 
     console.log(`Action ${ACTION_KEY}`)
 
-    if (ACTION_KEY !== APP_KEY) {
+    if (auth !== APP_KEY) {
         res.status(401).send('unauthorized');
         return;
     }
