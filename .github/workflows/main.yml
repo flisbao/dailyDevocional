@@ -1,0 +1,14 @@
+name: hourly-cron-job-main
+on:
+  schedule:
+    - cron: '0 5 * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      
+      - run: cd scheduled && npm i && node main.js
