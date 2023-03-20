@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
     console.log(JSON.stringify(req.headers.auth))
 
-    const { ACTION_KEY } = req.headers['auth'].split(" ")[1];
+    const { ACTION_KEY } = req.headers.auth.split(" ")[1];
 
     const bot = new TelegramBot(TELEGRAM_BOT, { polling: false });
 
