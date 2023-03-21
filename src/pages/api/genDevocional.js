@@ -9,6 +9,12 @@ export default async function handler(req, res) {
   const { TELEGRAM_BOT } = process.env;
   const bot = new TelegramBot(TELEGRAM_BOT, { polling: false });
 
+  if(data.message.toLowerCase().startsWith('/start')) {
+    await bot.sendMessage(data.chatId, "Olá, obrigado por me adicionar no seu telegram. \n O objetivo desse bot é te trazer devocionais diariamente. \n Para começar a receber os devocionais por favor escreva a palavra \"inscrever\" e depois diariamente você irá receber um novo devocional.")
+    res.json({})
+    return;
+  }
+
   if (data.message.toLowerCase().startsWith('inscrever')) {
 
     const docs = await db.collection("inscricoes").where("chatId", "==", data.chatId).get();
