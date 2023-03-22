@@ -1,9 +1,9 @@
-const { Configuration, OpenAIApi } = require("openai");
+import { Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-async function generateDevotional() {
+export async function generateDevotional() {
   try {
 
     console.log('Api token', process.env.OPENAI_API_KEY.substring(5,2));
@@ -27,8 +27,4 @@ async function generateDevotional() {
   } catch (ex) {
     console.error('while getting devotional an error happened ', ex.message)
   }
-}
-
-module.exports = {
-  generateDevotional
 }

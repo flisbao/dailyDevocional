@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     }
 
     const subscriptionDocuments = await db.collection('inscricoes').get();
-    const currentDevotionalDocuments = await db.collection('devotional').get();
+    const currentDevotionalDocuments = await db.collection('devotional').doc("current")
     let devotional = '';
     currentDevotionalDocuments.forEach(doc => {
       devotional = doc.get('devotional')

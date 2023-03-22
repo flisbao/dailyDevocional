@@ -1,8 +1,2 @@
 {
-    "crons": [
-        {
-          "path": "/api/callEveryone",
-          "schedule": "0 5 * * *"
-        }
-      ]
 }
