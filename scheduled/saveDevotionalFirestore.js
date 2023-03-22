@@ -16,7 +16,7 @@ async function main() {
         })
         const subscriptionDocuments = await db.collection('inscricoes').get();
         subscriptionDocuments.forEach(async (doc) => {
-            const response = await bot.sendMessage(doc.get('chatId'), devotional);
+            const response = await bot.sendMessage(doc.get('chatId'), text);
             console.log(response);
             await setTimeout(500);
         });
