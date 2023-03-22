@@ -1,7 +1,7 @@
-import { generateDevotional } from "./generateDevotional"
-import db from "./config/firebaseConfig"
+import db from "./config/firebaseConfig.js"
 import TelegramBot from 'node-telegram-bot-api';
 import { setTimeout } from 'timers/promises';
+import { generateDevotional } from "./openapi/generateDevotional.js";
 
 async function main() {
     try {
