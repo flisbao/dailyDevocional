@@ -30,11 +30,7 @@ export default async function handler(req, res) {
     }
 
     const subscriptionDocuments = await db.collection('inscricoes').get();
-    const currentDevotionalDocuments = await db.collection('devotional').doc("current")
-    let devotional = '';
-    currentDevotionalDocuments.forEach(doc => {
-      devotional = doc.get('devotional')
-    })
+    const devotional = await db.collection('devotional').doc("current").get('devotional');
 
     await bot.sendMessage(data.chatId, "Segue abaixo o último devocional")
     await bot.sendMessage(data.chatId, devotional);
